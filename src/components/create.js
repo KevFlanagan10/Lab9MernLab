@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 class Create extends React.Component {
   constructor(props){
     super(props);
@@ -26,13 +28,27 @@ class Create extends React.Component {
     this.setState({Poster: e.target.value});
   }
 
-  handleSubmit(e){
+  handleSubmit(e){//when you click the button this gets fired
     alert(this.state.Title+ "      " + this.state.Year 
     +"       "+ this.state.Poster);
     e.preventDefault();
+
+    const newMovie = {
+      title:this.state.Title,
+      year:this.state.Year,
+      poster:this.state.Poster
+    };
+    //sets the url in the clients side 
+    axios.post('http://localhost:4000/api/movies',newMovie)
+        .then()
+        .catch();
+
     this.setState({Title:'',
                   Year:'',
-                Poster:''});
+                  Poster:''
+                });
+
+              
                 
   }
 
